@@ -27,5 +27,14 @@ public class CensusAnalyserTest
 		}
 		
 	}
+	@Test
+	 public void givenCSVFile_ReturnException_ifFileNotPresent() {
+	        try {
+	            StateCensusAnalyser censusAnalyser = new StateCensusAnalyser();
+	            censusAnalyser.loadIndiaCensusData(FILE_NOT_FOUND);
+	        } catch (CensusAnalyserException e) {
+	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+	        }
+	    }
 	
 }
