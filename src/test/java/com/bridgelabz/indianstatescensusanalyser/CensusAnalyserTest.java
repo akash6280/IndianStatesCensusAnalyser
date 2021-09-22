@@ -81,5 +81,15 @@ public class CensusAnalyserTest
 			}
 			
 		}
+	 
+	 @Test
+	 public void givenStateCSVFile_ifFileNotPresent_throwException_() {
+	        try {
+	            StateCensusAnalyser censusAnalyser = new StateCensusAnalyser();
+	            censusAnalyser.loadStateCensusData(FILE_NOT_FOUND);
+	        } catch (CensusAnalyserException e) {
+	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+	        }
+	    }
 	
 }
