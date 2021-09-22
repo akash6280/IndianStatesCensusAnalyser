@@ -21,6 +21,7 @@ public class CensusAnalyserTest
 	
 	private static final String STATE_CENSUS_CORRECT_DATA_CSV_FILE_PATH = "./src/test/resources/StateCensusCorrectData.csv";
 	private static final String STATE_CENSUS_CORRECT_DATA_CSV_WITH_INCORRECT_HEADER = "./src/test/resources/StateCensusDataIncorrectHeader.csv";
+	private static final String STATE_CENSUS_CORRECT_DATA_CSV_WITH_WRONG_DELIMITER = "./src/test/resources/StateCensusDataWithWrongDelimiter.csv";
 	@Test
 	public void givenStateCensusCsvFile_ShouldReturn_CorrectNumberOfRecords() {
 		try {	
@@ -98,6 +99,16 @@ public class CensusAnalyserTest
 	        try {
 	            StateCensusAnalyser stateCensusAnalyserMain = new StateCensusAnalyser();
 	            stateCensusAnalyserMain.loadStateCensusData(STATE_CENSUS_CORRECT_DATA_CSV_WITH_INCORRECT_HEADER);
+	        } catch (CensusAnalyserException e) {
+	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER_OR_HEADER, e.type);
+	        }
+	    }
+	 
+	 @Test
+	    public void givenStateCSVFile_WhenWrongDelimiter_throwException() {
+	        try {
+	            StateCensusAnalyser stateCensusAnalyserMain = new StateCensusAnalyser();
+	            stateCensusAnalyserMain.loadStateCensusData(STATE_CENSUS_CORRECT_DATA_CSV_WITH_WRONG_DELIMITER);
 	        } catch (CensusAnalyserException e) {
 	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER_OR_HEADER, e.type);
 	        }
