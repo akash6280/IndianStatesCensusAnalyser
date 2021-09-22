@@ -15,6 +15,7 @@ public class CensusAnalyserTest
 {
 	private static final String INDIA_CENSUS_CORRECT_DATA_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusCorrectData.csv";
 	public static final String FILE_NOT_FOUND = "incorrectFilePath.csv";
+	private static final String INDIA_CENSUS_CORRECT_DATA_CSV_WITH_INCORRECT_HEADER = "./src/test/resources/CensusDataIncorrectHeader.csv";
 	@Test
 	public void givenStateCensusCsvFile_ShouldReturn_CorrectNumberOfRecords() {
 		try {	
@@ -28,12 +29,21 @@ public class CensusAnalyserTest
 		
 	}
 	@Test
-	 public void givenCSVFile_ReturnException_ifFileNotPresent() {
+	 public void givenCSVFile_ifFileNotPresent_throwException_() {
 	        try {
 	            StateCensusAnalyser censusAnalyser = new StateCensusAnalyser();
 	            censusAnalyser.loadIndiaCensusData(FILE_NOT_FOUND);
 	        } catch (CensusAnalyserException e) {
 	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+	        }
+	    }
+	 @Test
+	    public void givenCSVFile_WhenHeaderAbsent_throwException() {
+	        try {
+	            StateCensusAnalyser stateCensusAnalyserMain = new StateCensusAnalyser();
+	            stateCensusAnalyserMain.loadIndiaCensusData(INDIA_CENSUS_CORRECT_DATA_CSV_WITH_INCORRECT_HEADER);
+	        } catch (CensusAnalyserException e) {
+	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER_OR_HEADER, e.type);
 	        }
 	    }
 	
