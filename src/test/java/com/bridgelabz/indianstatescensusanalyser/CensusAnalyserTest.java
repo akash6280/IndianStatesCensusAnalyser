@@ -57,5 +57,14 @@ public class CensusAnalyserTest
 	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER_OR_HEADER, e.type);
 	        }
 	    }
+	 @Test
+	    public void givenFile_WithWrongFormat_throwException() {
+	        try {
+	            StateCensusAnalyser stateCensusAnalyserMain = new StateCensusAnalyser();
+	            stateCensusAnalyserMain.loadIndiaCensusData(WRONG_FILE_FORMAT);
+	        } catch (CensusAnalyserException e) {
+	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_INCORRECT_FILE_FORMAT, e.type);
+	        }
+	    }
 	
 }
