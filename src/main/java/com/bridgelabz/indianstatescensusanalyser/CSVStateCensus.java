@@ -5,6 +5,7 @@ package com.bridgelabz.indianstatescensusanalyser;
 
 import com.opencsv.bean.CsvBindByName;
 public class CSVStateCensus {
+	
 	@CsvBindByName(column = "State", required = true)
     public String state;
 
@@ -18,13 +19,9 @@ public class CSVStateCensus {
     public int densityPerSqKm;
 
     @Override
-    public String toString() {
-        return "IndiaCensusCSV{" +
-                "State='" + state + '\'' +
-                ", Population='" + population + '\'' +
-                ", AreaInSqKm='" + areaInSqKm + '\'' +
-                ", DensityPerSqKm='" + densityPerSqKm + '\'' +
-                '}';
-    }
-
+	public String toString() {
+		return "CSVStateCensus [state=" + state + ", population=" + population + ", areaInSqKm=" + areaInSqKm
+				+ ", densityPerSqKm=" + densityPerSqKm + "]";
+	}
+    
 }
