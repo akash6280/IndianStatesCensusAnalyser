@@ -20,6 +20,7 @@ public class CensusAnalyserTest
 	private static final String WRONG_FILE_FORMAT = "./src/test/resources/FileFormatIncorrect.txt";
 	
 	private static final String STATE_CENSUS_CORRECT_DATA_CSV_FILE_PATH = "./src/test/resources/StateCensusCorrectData.csv";
+	private static final String STATE_CENSUS_CORRECT_DATA_CSV_WITH_INCORRECT_HEADER = "./src/test/resources/StateCensusDataIncorrectHeader.csv";
 	@Test
 	public void givenStateCensusCsvFile_ShouldReturn_CorrectNumberOfRecords() {
 		try {	
@@ -89,6 +90,16 @@ public class CensusAnalyserTest
 	            censusAnalyser.loadStateCensusData(FILE_NOT_FOUND);
 	        } catch (CensusAnalyserException e) {
 	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+	        }
+	    }
+	 
+	 @Test
+	    public void givenStateCSVFile_WhenHeaderAbsent_throwException() {
+	        try {
+	            StateCensusAnalyser stateCensusAnalyserMain = new StateCensusAnalyser();
+	            stateCensusAnalyserMain.loadStateCensusData(STATE_CENSUS_CORRECT_DATA_CSV_WITH_INCORRECT_HEADER);
+	        } catch (CensusAnalyserException e) {
+	            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER_OR_HEADER, e.type);
 	        }
 	    }
 	
